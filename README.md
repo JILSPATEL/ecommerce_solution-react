@@ -1,55 +1,116 @@
-# Ecommerce
+# E-commerce Solution - React & MySQL
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+A modern, full-stack e-commerce application built with React, Node.js, and MySQL.
 
-# Prerequisites
+## 📋 Prerequisites
 
-Make sure you have the following installed on your machine:
-- **Angular CLI**: 14.1.3
-- **Node.js**: 16.17.0
-- **npm (Node Package Manager)**: 8.15.0
+-   **Node.js** (v16+)
+-   **MySQL** (Running in WSL or locally)
+-   **Terminal**: PowerShell or WSL
 
-# Installation
+## 🚀 Quick Setup (5 Minutes)
 
-## Steps For Execute Project In Any System:
+### 1. Database Setup (WSL)
 
-Follow these steps to install and run the project:
+Run these commands in your WSL terminal to set up the database and seed it with data.
 
-1. **Clone the repository**
-   `git clone https://github.com/JILSPATEL/ecommerce_website_angular.14.git`
+```bash
+# Start MySQL Service
+sudo service mysql start
 
-2. **Navigate to the project directory**
-   `cd your-repo-name`
+# Login to MySQL
+mysql -u root -p
+```
 
-3. **Install dependencies**
-   `npm install`
+Inside the MySQL shell:
 
-4. **Serve the application**
-   `ng serve`
+```sql
+CREATE DATABASE IF NOT EXISTS ecommerce_solution;
+USE ecommerce_solution;
 
-5. **Open the application in your browser**
-   By default, the application will be running at `http://localhost:4200/`. Open this URL in your browser to see the application.
+-- Run Schema
+SOURCE /mnt/d/Projects/ecommerce_solution/database/schema.sql;
 
-## Development server
+-- Load Seed Data
+SOURCE /mnt/d/Projects/ecommerce_solution/database/seed.sql;
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+EXIT;
+```
 
-## Code scaffolding
+### 2. Backend Setup
+Open a **new terminal** (PowerShell/CMD) and run:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+cd backend
+npm install
+npm run dev
+```
+> **Note**: The server runs on `http://localhost:5000`.
 
-## Build
+### 3. Frontend Setup
+Open **another new terminal** and run:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+cd react-ecommerce
+npm install
+npm run dev
+```
+> **Note**: The frontend runs on `http://localhost:5173`.
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🔐 Credentials & Testing
 
-## Running end-to-end tests
+### Database Access
+-   **User**: `root`
+-   **Password**: `root`
+-   **Database**: `ecommerce_solution`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Test Accounts (Pre-seeded)
+Use these accounts to log in immediately.
 
-## Further help
+| Role   | Email | Password |
+| :--- | :--- | :--- |
+| **User** | `jils@user.com` | `abc@123` |
+| **Seller** | `jils@seller.com` | `abc@123` |
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+> **Login Tips**:
+> - Go to **User Login** for customer features (Buying).
+> - Go to **Seller Login** for seller features (Adding/Managing Products).
+> - You can also **Sign Up** a new account; passwords will be automatically hashed.
+
+---
+
+## 🛠️ Project Structure
+
+```
+ecommerce_solution/
+├── backend/            # Express.js API
+├── react-ecommerce/    # React Frontend
+├── database/           # SQL Schema & Seeds
+└── README.md           # This file
+```
+
+## 🐛 Troubleshooting
+
+### MySQL Connection Failed
+-   **Error**: `Error connecting to MySQL database`
+-   **Fix**: Ensure MySQL is running (`sudo service mysql start` in WSL) and the password in `backend/.env` is correct.
+
+### Database Not Found
+-   **Error**: `Unknown database 'ecommerce_solution'`
+-   **Fix**: Rerun the **Database Setup** steps above.
+
+### Port Conflicts
+-   **Error**: `EADDRINUSE :::5000`
+-   **Fix**: Kill the process using port 5000 or change the `PORT` in `backend/.env`.
+
+### Login Fails
+-   **Fix**: If standard credentials don't work, try creating a **new account** via the Sign Up page. New accounts always work correctly.
+
+---
+
+## 🌟 Features
+-   **User**: Browse products by category, Search, View details, User Authentication.
+-   **Seller**: Manage products (Add/Edit/Delete), Seller Dashboard.
+-   **Tech**: React 18, Vite, Node.js, Express, MySQL, JWT Authentication.
