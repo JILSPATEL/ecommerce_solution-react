@@ -5,21 +5,22 @@ A modern, full-stack e-commerce application built with React, Node.js, and MySQL
 ## 📋 Prerequisites
 
 -   **Node.js** (v16+)
--   **MySQL** (Running in WSL or locally)
--   **Terminal**: PowerShell or WSL
+-   **MySQL** (Running on Linux or locally)
+-   **Terminal**: Bash / Terminal
 
 ## 🚀 Quick Setup (5 Minutes)
 
-### 1. Database Setup (WSL)
+### 1. Database Setup (Linux)
 
-Run these commands in your WSL terminal to set up the database and seed it with data.
+Run these commands in your terminal to set up the database and seed it with data.
 
 ```bash
 # Start MySQL Service
-sudo service mysql start
+sudo systemctl start mysql
 
 # Login to MySQL
 mysql -u root -p
+# Password: root
 ```
 
 Inside the MySQL shell:
@@ -28,11 +29,11 @@ Inside the MySQL shell:
 CREATE DATABASE IF NOT EXISTS ecommerce_solution;
 USE ecommerce_solution;
 
--- Run Schema
-SOURCE /mnt/d/Projects/ecommerce_solution/database/schema.sql;
+-- Run Schema (Adjust path if needed)
+SOURCE ./database/schema.sql;
 
--- Load Seed Data
-SOURCE /mnt/d/Projects/ecommerce_solution/database/seed.sql;
+-- Load Seed Data (Adjust path if needed)
+SOURCE ./database/seed.sql;
 
 EXIT;
 ```
@@ -95,7 +96,7 @@ ecommerce_solution/
 
 ### MySQL Connection Failed
 -   **Error**: `Error connecting to MySQL database`
--   **Fix**: Ensure MySQL is running (`sudo service mysql start` in WSL) and the password in `backend/.env` is correct.
+-   **Fix**: Ensure MySQL is running (`sudo systemctl start mysql`) and the password in `backend/.env` is correct.
 
 ### Database Not Found
 -   **Error**: `Unknown database 'ecommerce_solution'`
