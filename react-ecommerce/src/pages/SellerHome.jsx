@@ -17,7 +17,7 @@ const SellerHome = () => {
     const fetchProducts = async () => {
         try {
             setLoading(true);
-            const data = await productService.getAllProducts();
+            const data = await productService.getMyProducts();
             setProducts(data);
         } catch (err) {
             console.error('Error fetching products:', err);

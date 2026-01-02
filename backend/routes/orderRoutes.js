@@ -99,13 +99,13 @@ router.get('/:orderId', authMiddleware, async (req, res) => {
     }
 });
 
-// Get all orders (seller only)
+// Get seller's orders
 router.get('/seller/all', sellerAuthMiddleware, async (req, res) => {
     try {
-        const orders = await Order.getAll();
+        const orders = await Order.findBySellerId(req.seller.id);
         res.json(orders);
     } catch (error) {
-        console.error('Get all orders error:', error);
+        console.error('Get seller orders error:', error);
         res.status(500).json({ message: 'Server error fetching orders' });
     }
 });

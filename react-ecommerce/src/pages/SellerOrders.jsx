@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { cartService } from '../services/cartService';
+import { orderService } from '../services/orderService';
 import './SellerOrders.css';
 
 const SellerOrders = () => {
@@ -13,7 +13,7 @@ const SellerOrders = () => {
 
     const fetchOrders = async () => {
         try {
-            const data = await cartService.getSellerOrders();
+            const data = await orderService.getAllOrders();
             setOrders(data);
         } catch (err) {
             console.error('Error fetching orders:', err);
@@ -25,7 +25,7 @@ const SellerOrders = () => {
 
     const handleStatusUpdate = async (orderId, newStatus) => {
         try {
-            await cartService.updateOrderStatus(orderId, newStatus);
+            await orderService.updateOrderStatus(orderId, newStatus);
             setOrders(orders.map(order =>
                 order.id === orderId ? { ...order, order_status: newStatus } : order
             ));

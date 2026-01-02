@@ -41,20 +41,32 @@ class Order {
         return orders;
     }
 
-    // Get all orders (for seller)
-    static async getAll() {
+    // Get orders containing seller's products
+    static async findBySellerId(sellerId) {
         const query = `
-      SELECT o.*, u.name as user_name
-      FROM orders o
-      LEFT JOIN users u ON o.user_id = u.id
-      ORDER BY o.created_at DESC
-    `;
-        const [orders] = await db.execute(query);
+            SELECT DISTINCT o.*, u.name as user_name
+            FROM orders o
+            JOIN order_items oi ON o.id = oi.order_id
+            JOIN products p ON oi.product_id = p.id
+            LEFT JOIN users u ON o.user_id = u.id
+            WHERE p.seller_id = ?
+            ORDER BY o.created_at DESC
+        `;
+        const [orders] = await db.execute(query, [sellerId]);
 
+        // For each order, only return items belonging to this seller
         for (const order of orders) {
-            const itemsQuery = 'SELECT * FROM order_items WHERE order_id = ?';
-            const [items] = await db.execute(itemsQuery, [order.id]);
+            const itemsQuery = `
+                SELECT oi.* 
+                FROM order_items oi
+                JOIN products p ON oi.product_id = p.id
+                WHERE oi.order_id = ? AND p.seller_id = ?
+            `;
+            const [items] = await db.execute(itemsQuery, [order.id, sellerId]);
             order.items = items;
+
+            // Recalculate total for just this seller's items (optional, but good for display)
+            // order.seller_total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         }
 
         return orders;

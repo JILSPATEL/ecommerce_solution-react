@@ -114,4 +114,5 @@ ecommerce_solution/
 ## 🌟 Features
 -   **User**: Browse products by category, Search, View details, User Authentication.
 -   **Seller**: Manage products (Add/Edit/Delete), Seller Dashboard.
+-   **Security**: Sellers can only view/manage their own products and orders.
 -   **Tech**: React 18, Vite, Node.js, Express, MySQL, JWT Authentication.

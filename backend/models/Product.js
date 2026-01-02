@@ -40,24 +40,31 @@ class Product {
         return { id, ...productData };
     }
 
+    // Get products by seller
+    static async findBySellerId(sellerId) {
+        const query = 'SELECT * FROM products WHERE seller_id = ? ORDER BY created_at DESC';
+        const [rows] = await db.execute(query, [sellerId]);
+        return rows;
+    }
+
     // Update product
-    static async update(id, productData) {
+    static async update(id, productData, sellerId) {
         const { name, price, category, color, description, image } = productData;
 
         const query = `
       UPDATE products 
       SET name = ?, price = ?, category = ?, color = ?, description = ?, image = ?
-      WHERE id = ?
+      WHERE id = ? AND seller_id = ?
     `;
-        const [result] = await db.execute(query, [name, price, category, color, description, image, id]);
+        const [result] = await db.execute(query, [name, price, category, color, description, image, id, sellerId]);
 
         return result.affectedRows > 0;
     }
 
     // Delete product
-    static async delete(id) {
-        const query = 'DELETE FROM products WHERE id = ?';
-        const [result] = await db.execute(query, [id]);
+    static async delete(id, sellerId) {
+        const query = 'DELETE FROM products WHERE id = ? AND seller_id = ?';
+        const [result] = await db.execute(query, [id, sellerId]);
         return result.affectedRows > 0;
     }
 

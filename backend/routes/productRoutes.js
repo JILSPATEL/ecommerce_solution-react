@@ -16,6 +16,17 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Get seller's products
+router.get('/my-products', sellerAuth, async (req, res) => {
+    try {
+        const products = await Product.findBySellerId(req.seller.id);
+        res.json(products);
+    } catch (error) {
+        console.error('Get my products error:', error);
+        res.status(500).json({ message: 'Server error fetching your products' });
+    }
+});
+
 // Get trending products
 router.get('/trending', async (req, res) => {
     try {
@@ -133,7 +144,7 @@ router.put('/:id',
                 return res.status(400).json({ errors: errors.array() });
             }
 
-            const updated = await Product.update(req.params.id, req.body);
+            const updated = await Product.update(req.params.id, req.body, req.seller.id);
             if (!updated) {
                 return res.status(404).json({ message: 'Product not found' });
             }
@@ -149,7 +160,7 @@ router.put('/:id',
 // Delete product (seller only)
 router.delete('/:id', sellerAuth, async (req, res) => {
     try {
-        const deleted = await Product.delete(req.params.id);
+        const deleted = await Product.delete(req.params.id, req.seller.id);
         if (!deleted) {
             return res.status(404).json({ message: 'Product not found' });
         }

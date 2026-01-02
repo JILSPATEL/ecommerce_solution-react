@@ -4,7 +4,8 @@
 -- Insert sellers (updated to match actual database)
 INSERT INTO sellers (id, name, email, password) VALUES
 ('36cc9a05-f337-400d-8d3e-bdf757b925ad', 'Jils', 'jils@seller.com', '$2a$10$FuamiyzaxBPcR6ibyHteHOX9e9d/zPbCt0zI6vsrPR3kFOl74KK6i'),  -- Actual password hash from your DB abc@123
-('9b95', 'seller1', 'seller1@gmail.com', '$2a$10$YqY8Z1Z8Z1Z8Z1Z8Z1Z8Z.jK5JZ5JZ5JZ5JZ5JZ5JZ5JZ5JZj');  -- Password: seller1@123
+('9b95', 'seller1', 'seller1@gmail.com', '$2a$10$YqY8Z1Z8Z1Z8Z1Z8Z1Z8Z.jK5JZ5JZ5JZ5JZ5JZ5JZ5JZ5JZj'),  -- Password: seller1@123
+('seller-2', 'Gadget Hub', 'seller2@test.com', '$2b$10$wLd3nJzX9zX9zX9zX9zX9eX9zX9zX9zX9zX9zX9zX9zX9zX9zX9z'); -- Seller 2 (For testing isolation)
 
 -- Insert users (updated to match actual database)
 INSERT INTO users (id, name, email, password) VALUES
@@ -20,7 +21,10 @@ INSERT INTO products (id, name, price, category, color, description, image, sell
 ('5496', 'Sony Bravia 55" 4K TV', 139990.00, 'TV', 'Black', 'Experience unparalleled visual immersion and audio excellence with the Sony Bravia 55" 4K TV, offering the best combination of stunning resolution and superior sound quality for an unmatched entertainment experience.', 'https://www.andreselectronicexperts.com/files/image/attachment/51257/55A80K.jpg', '36cc9a05-f337-400d-8d3e-bdf757b925ad'),
 ('6ae7', 'Mi 32" HD TV', 15000.00, 'TV', 'Black', 'Enjoy immersive viewing experiences with the Mi 32" HD TV, delivering vibrant visuals and crisp details in high definition, perfect for enhancing your entertainment setup with affordability and quality.', 'https://manoharmobiles.com/wp-content/uploads/2022/01/mi-tv-4a-pro-80-cm-32-inches-hd-ready-android-led-tv-black-with-data-saver-500x500-1.jpg', '36cc9a05-f337-400d-8d3e-bdf757b925ad'),
 ('ddf6', 'Canon Camera', 126990.00, 'Camera', 'Darkgray', 'Capture life''s moments in stunning detail with a Canon camera, renowned for its exceptional image quality, reliability, and advanced features, making it the perfect choice for photographers of all levels.', 'https://x.imastudent.com/content/0016823_canon-eos-90d-dslr-camera-with-18-135mm-lens_500.jpeg', '36cc9a05-f337-400d-8d3e-bdf757b925ad'),
-('a029', 'Sony A9 Mirrorless', 320000.00, 'Camera', 'Black,White', 'Capture life''s moments with breathtaking clarity and precision using the Sony A9 Mirrorless Camera, renowned for its unparalleled speed, exceptional image quality, and advanced features, making it the ultimate choice for professional photographers and enthusiasts alike.', 'https://cdn.fstoppers.com/styles/large-16-9/s3/lead/2017/07/sony-alpha-a9-camera-for-wildlife-photography-review.jpg', '36cc9a05-f337-400d-8d3e-bdf757b925ad');
+('a029', 'Sony A9 Mirrorless', 320000.00, 'Camera', 'Black,White', 'Capture life''s moments with breathtaking clarity and precision using the Sony A9 Mirrorless Camera, renowned for its unparalleled speed, exceptional image quality, and advanced features, making it the ultimate choice for professional photographers and enthusiasts alike.', 'https://cdn.fstoppers.com/styles/large-16-9/s3/lead/2017/07/sony-alpha-a9-camera-for-wildlife-photography-review.jpg', '36cc9a05-f337-400d-8d3e-bdf757b925ad'),
+('prod-6', 'Dell XPS 15', 189990.00, 'Laptop', 'Silver', 'Creator edition laptop.', 'https://via.placeholder.com/400x300?text=Dell+XPS', 'seller-2'),
+('prod-7', 'iPad Air', 59900.00, 'Electronics', 'Blue', 'Light. Bright. Full of might.', 'https://via.placeholder.com/400x300?text=iPad+Air', 'seller-2'),
+('prod-8', 'OnePlus 12', 64999.00, 'Mobile', 'Flowy Emerald', 'Smooth beyond belief.', 'https://via.placeholder.com/400x300?text=OnePlus+12', 'seller-2');
 
 -- Insert cart items (assigning to actual users)
 INSERT INTO cart (id, user_id, product_id, quantity) VALUES

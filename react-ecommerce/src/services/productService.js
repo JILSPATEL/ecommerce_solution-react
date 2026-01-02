@@ -8,6 +8,12 @@ export const productService = {
         return response.data;
     },
 
+    // Get seller's own products
+    getMyProducts: async () => {
+        const response = await api.get('/products/my-products');
+        return response.data;
+    },
+
     // Get trending products
     getTrendingProducts: async (limit = 16) => {
         const response = await api.get(`/products/trending?limit=${limit}`);
