@@ -142,7 +142,7 @@ ecommerce_solution/
 
 ## 🌟 Features
 
-- **User**: Browse products, search, view details, authentication
-- **Seller**: Add/manage products and view seller orders
-- **Security**: JWT-based auth, sellers can access only their data
+- **User**: Browse products, search, view details, authentication.
+- **Seller**: Add/manage products and view seller orders.
+- **Security**: JWT-based auth, sellers can access only their data.
 
